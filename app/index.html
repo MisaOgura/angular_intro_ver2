@@ -5,15 +5,18 @@
     <script src='bower_components/angular/angular.js'></script>
     <script src='js/app.js'></script>
     <script src='js/controllers/ToDoController.js'></script>
+    <script src='js/services/ToDoFactory.js'></script>
     <title>Todos App</title>
   </head>
   <body>
     <div id='todos' ng-controller='ToDoController as controller'>
-      <input id='newtodos' type='text' ng-model='todoText' placeholder="add new todos">
-      <button id='addtodos' ng-click='controller.addToDo(todoText)'>Add to the list</button>
-      <button id='removetodos' ng-click='controller.removeToDo()'>Remove ToDo<button>
+      <input id='newtodos' type='text' ng-model='todoText' placeholder="Add new todos">
+      <button id='addtodos' ng-click='controller.addToDo(todoText);'>Add to the list</button>
+      <button id='removetodos' ng-click='controller.removeToDo();'>Remove ToDo</button>
+      <br>
       <li ng-repeat='each in controller.todos'>
         {{ each.text }}: {{ each.completed ? 'completed' : 'not completed'}}
+        <span class='complete' ng-click='each.complete();'>Complete</span>
       </li>
     </div>
   </body>

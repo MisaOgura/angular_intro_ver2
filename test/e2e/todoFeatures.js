@@ -1,18 +1,18 @@
 describe('Todos tracker', function() {
   it('has a title', function() {
-    browser.get('/app');
+    browser.get('/');
     expect(browser.getTitle()).toEqual('Todos App');
   });
 
   it('has two todos', function() {
-    browser.get('/app');
+    browser.get('/');
     var todos = $$('#todos li');
-    expect(todos.first().getText()).toEqual('ToDo1: completed');
-    expect(todos.last().getText()).toEqual('ToDo2: not completed');
+    expect(todos.first().getText()).toContain('ToDo1: completed');
+    expect(todos.last().getText()).toContain('ToDo2: not completed');
   });
 
   it('can add todos', function() {
-    browser.get('/app');
+    browser.get('/');
     $('#newtodos').sendKeys('New ToDo');
     $('#addtodos').click();
     var newTodo = $$('#todos li').last().getText();
@@ -20,9 +20,16 @@ describe('Todos tracker', function() {
   });
 
   it('can remove todos', function() {
-    browser.get('/app');
+    browser.get('/');
     $('#removetodos').click();
     var todos = $$('#todos li');
     expect(todos.count()).toEqual(1);
+  });
+
+  it('can mark todos as completed', function() {
+    browser.get('/');
+    var todo = $$("#todos li").last();
+    todo.element(by.css('.complete')).click();
+    expect(todo.getText()).toContain('ToDo2: completed');
   });
 });
