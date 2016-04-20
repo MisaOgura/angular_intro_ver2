@@ -8,8 +8,13 @@
     <title>Todos App</title>
   </head>
   <body>
-    <div id='todo' ng-controller='ToDoController as controller'>
-      {{ controller.todo }}
+    <div id='todos' ng-controller='ToDoController as controller'>
+      <input id='newtodos' type='text' ng-model='todoText' placeholder="add new todos">
+      <button id='addtodos' ng-click='controller.addToDo(todoText)'>Add to the list</button>
+      <button id='removetodos' ng-click='controller.removeToDo()'>Remove ToDo<button>
+      <li ng-repeat='each in controller.todos'>
+        {{ each.text }}: {{ each.completed ? 'completed' : 'not completed'}}
+      </li>
     </div>
   </body>
 </html>

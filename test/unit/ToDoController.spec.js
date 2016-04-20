@@ -1,13 +1,27 @@
 describe('ToDoController', function() {
   beforeEach(module('toDoApp'));
 
-  var ctrl;
+  var controller;
 
   beforeEach(inject(function($controller) {
-    ctrl = $controller('ToDoController');
+    controller = $controller('ToDoController');
   }));
 
-  it('initialises with a toDo', function() {
-    expect(ctrl.todo).toEqual("ToDo1");
+  it('initialises with several todos', function() {
+    var todos = [{ text: 'ToDo1', completed: true },
+                 { text: 'ToDo2', completed: false }
+                ];
+    expect(controller.todos).toEqual(todos);
+  });
+
+  it('adds a new todo', function() {
+    controller.addToDo('New todo');
+    var new_todo = {text: 'New todo', completed: false};
+    expect(controller.todos.pop()).toEqual(new_todo);
+  });
+
+  it('removes a todo', function() {
+    controller.removeToDo();
+    expect(controller.todos.length).toEqual(1);
   });
 });
