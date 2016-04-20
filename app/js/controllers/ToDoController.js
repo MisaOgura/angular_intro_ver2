@@ -4,8 +4,7 @@ toDoApp.controller('ToDoController', ['ToDoFactory', function(ToDoFactory) {
                ];
 
   this.addToDo = function(todoText) {
-    var new_todo = {text: todoText, completed: false};
-    this.todos.push(new_todo);
+    this.todos.push(new ToDoFactory(todoText));
   };
 
   this.removeToDo = function() {
